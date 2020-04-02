@@ -3,7 +3,9 @@
         <TopBar page-title="Meals"></TopBar>
         <v-list class="transparent">
             <v-list-item v-for="(meal, index) in meals" :key="'meal' + index">
-                <MealOverview>
+                <MealOverview :meal-name="meal.name" :price="meal.price" :rating="meal.rating"
+                              :user-name="meal.userName" :start-time="meal.startTime" :end-time="meal.endTime"
+                              :address="meal.address" :tags="meal.tags">
                     <template v-slot:activator="{on}">
                         <v-card class="rounded" v-on="on" flat>
                             <v-img src="https://picsum.photos/510/300?random">
@@ -47,7 +49,11 @@
                         price: "€1,50",
                         startTime: "12:00",
                         endTime: "14:00",
-                        distance: "2.5km"
+                        distance: "2.5km",
+                        rating: 3.4,
+                        userName: "Marcel Veldhuizen",
+                        address: "Eindhoven, Hooidonksemolen",
+                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
                     }
                 ],
             }

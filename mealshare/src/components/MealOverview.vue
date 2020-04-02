@@ -25,7 +25,7 @@
                             <v-img src="https://picsum.photos/510/300?random">
                                 <v-sheet class="fill-height transparent mealImgGrad">
                                     <v-row align="space-between" class="ma-0 fill-height">
-                                        <MealTitle></MealTitle>
+                                        <MealTitle :price="price" :title="mealName"></MealTitle>
                                         <v-col cols="12">
                                             <v-row align="end" justify="end" class="ma-0 fill-height">
                                                 <v-chip dense color="#74D277" v-for="(tag, index) in tags"
@@ -39,8 +39,8 @@
                             </v-img>
                         </v-card>
                         <v-row class="ma-0 mt-2">
-                            <v-rating v-model="rating" color="#74D277" size="32" half-increments readonly
-                                      dense></v-rating>
+                            <v-rating v-model="rating" color="#74D277" background-color="#74D277" size="32"
+                                      half-increments readonly dense></v-rating>
                         </v-row>
                         <v-row class="ma-0">
                             <v-card-title class="pl-0">
@@ -51,13 +51,13 @@
                         <v-row class="ma-0">
                             <v-card-title class="pl-0">
                                 <v-icon color="#74D277" class="mr-4">mdi-map-marker</v-icon>
-                                {{mealLocation}}
+                                {{address}}
                             </v-card-title>
                         </v-row>
                         <v-row class="ma-0">
                             <v-card-title class="pl-0">
                                 <v-icon color="#74D277" class="mr-4">mdi-alarm</v-icon>
-                                {{timeSpan}}
+                                {{startTime}} - {{endTime}}
                             </v-card-title>
                         </v-row>
                         <v-row class="ma-0">
@@ -89,19 +89,25 @@
 
 <script>
     import MealTitle from "./Meal/MealTitle";
+
     export default {
         name: "MealOverview",
         components: {MealTitle},
         data() {
             return {
-                rating: 4.3,
                 dialog: false,
-                tags: ["spicy", "gluten", "meat", "fish", "fruit",],
-                userName: "Piet Klaasen",
-                mealLocation: "Eindhoven, Rachelsmolen",
-                timeSpan: "16:00 - 18:00",
                 publicPath: process.env.BASE_URL
             }
         },
+        props: {
+            mealName: String,
+            price: String,
+            tags: Array,
+            rating: Number,
+            userName: String,
+            address: String,
+            startTime: String,
+            endTime: String,
+        }
     }
 </script>
