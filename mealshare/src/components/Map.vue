@@ -1,6 +1,6 @@
 <template>
     <MglMap :accessToken="accessToken" :mapStyle="mapStyle" @load="onMapLoaded">
-        <MglMarker :coordinates="coordinates" color="green">
+        <MglMarker :coordinates="coordinates" color="#74D277">
             <MglPopup :closeButton="false" :offset="{
                 'top': [0, 0],
                  'top-left': [0,0],
@@ -11,17 +11,17 @@
                       'left': [markerRadius, (markerHeight - markerRadius) * -1],
                        'right': [-markerRadius, (markerHeight - markerRadius) * -1]
             }">
-                <v-card class="green lighten-1">
+                <v-card color="#74D277">
                     <v-row class="ma-0" justify="center" align="center">
                         <v-col cols="10" class="pa-0">
                             <v-row class="ma-0">
-                                <v-card-text class="pa-2 pb-0">MeatBalls</v-card-text>
+                                <v-card-text class="pa-2 pb-0">{{mealName}}</v-card-text>
                                 <v-row class="ma-0 px-2 pb-1">
                                     <v-icon small>mdi-alarm</v-icon>
-                                    18:00 - 20:00
+                                    {{timeSpan}}
                                     <v-spacer></v-spacer>
                                     <v-icon small>mdi-currency-usd</v-icon>
-                                    €4,-
+                                    {{price}}
                                 </v-row>
                             </v-row>
                         </v-col>
@@ -56,6 +56,9 @@
                 markerHeight: 23,
                 markerRadius: 10,
                 linearOffset: 0,
+                timeSpan: "18:00 - 20:00",
+                price: "€4,-",
+                mealName: "MeatBalls",
             }
         },
         methods: {
