@@ -23,18 +23,9 @@
                     <v-col cols="10" class="pa-0">
                         <v-card class="mt-4 rounded" flat>
                             <v-img src="https://picsum.photos/510/300?random">
-                                <v-sheet id="mealImgGrad" class="fill-height transparent">
+                                <v-sheet class="fill-height transparent mealImgGrad">
                                     <v-row align="space-between" class="ma-0 fill-height">
-                                        <v-col cols="12" class="pa-0">
-                                            <v-row class="ma-0">
-                                                <v-card-title class="white--text pt-3 pb-1">Meatballs
-                                                </v-card-title>
-                                                <v-spacer></v-spacer>
-                                                <v-card flat color="#74D277" tile id="shaved-edge">
-                                                    <v-card-title class="white--text py-2">€3,50</v-card-title>
-                                                </v-card>
-                                            </v-row>
-                                        </v-col>
+                                        <MealTitle></MealTitle>
                                         <v-col cols="12">
                                             <v-row align="end" justify="end" class="ma-0 fill-height">
                                                 <v-chip dense color="#74D277" v-for="(tag, index) in tags"
@@ -97,8 +88,10 @@
 </template>
 
 <script>
+    import MealTitle from "./Meal/MealTitle";
     export default {
         name: "MealOverview",
+        components: {MealTitle},
         data() {
             return {
                 rating: 4.3,
@@ -112,13 +105,3 @@
         },
     }
 </script>
-
-<style scoped>
-    #mealImgGrad {
-        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 10%, rgba(0, 0, 0, 0.35) 30%, transparent 40%);
-    }
-
-    #shaved-edge {
-        border-bottom-left-radius: 19px;
-    }
-</style>
