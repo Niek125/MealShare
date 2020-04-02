@@ -4,7 +4,7 @@
             <v-card-title class="white--text pt-3 pb-1">Meatballs
             </v-card-title>
             <v-spacer></v-spacer>
-            <v-card flat color="#74D277" tile id="shaved-edge">
+            <v-card flat color="#74D277" tile class="shaved-edge">
                 <v-card-title class="white--text py-2">€3,50</v-card-title>
             </v-card>
         </v-row>
@@ -18,7 +18,7 @@
 </script>
 
 <style scoped>
-    #shaved-edge {
+    .shaved-edge {
         border-bottom-left-radius: 19px;
     }
 </style>
