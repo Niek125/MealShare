@@ -2,24 +2,24 @@
     <div>
         <TopBar page-title="Meals"></TopBar>
         <v-list class="transparent">
-            <v-list-item>
+            <v-list-item v-for="(meal, index) in meals" :key="'meal' + index">
                 <MealOverview>
                     <template v-slot:activator="{on}">
                         <v-card class="rounded" v-on="on" flat>
                             <v-img src="https://picsum.photos/510/300?random">
                                 <v-sheet class="fill-height transparent mealImgGrad">
-                                    <MealTitle></MealTitle>
+                                    <MealTitle :price="meal.price" :title="meal.name"></MealTitle>
                                 </v-sheet>
                             </v-img>
                             <v-sheet color="white">
                                 <v-col cols="12" class="pa-0">
                                     <v-row class="ma-0">
                                         <v-icon class="ml-4">mdi-alarm</v-icon>
-                                        <v-card-title>16:00 - 18:00
+                                        <v-card-title>{{meal.startTime}} - {{meal.endTime}}
                                         </v-card-title>
                                         <v-spacer></v-spacer>
                                         <v-icon>mdi-map-marker</v-icon>
-                                        <v-card-title>0.5km</v-card-title>
+                                        <v-card-title>{{meal.distance}}</v-card-title>
                                     </v-row>
                                 </v-col>
                             </v-sheet>
@@ -38,7 +38,20 @@
 
     export default {
         name: "Meals",
-        components: {MealTitle, MealOverview, TopBar}
+        components: {MealTitle, MealOverview, TopBar},
+        data() {
+            return {
+                meals: [
+                    {
+                        name: "Spaghetti",
+                        price: "€1,50",
+                        startTime: "12:00",
+                        endTime: "14:00",
+                        distance: "2.5km"
+                    }
+                ],
+            }
+        }
     }
 </script>
 

@@ -1,11 +1,11 @@
 <template>
     <v-col cols="12" class="pa-0">
         <v-row class="ma-0">
-            <v-card-title class="white--text pt-3 pb-1">Meatballs
+            <v-card-title class="white--text pt-3 pb-1">{{title}}
             </v-card-title>
             <v-spacer></v-spacer>
             <v-card flat color="#74D277" tile class="shaved-edge">
-                <v-card-title class="white--text py-2">€3,50</v-card-title>
+                <v-card-title class="white--text py-2">{{price}}</v-card-title>
             </v-card>
         </v-row>
     </v-col>
@@ -13,7 +13,11 @@
 
 <script>
     export default {
-        name: "MealTitle"
+        name: "MealTitle",
+        props: {
+            title: String,
+            price: String,
+        }
     }
 </script>
 
