@@ -11,7 +11,7 @@
                       'left': [markerRadius, (markerHeight - markerRadius) * -1],
                        'right': [-markerRadius, (markerHeight - markerRadius) * -1]
             }">
-                <v-card color="#74D277">
+                <v-card color="#74D277" flat>
                     <v-row class="ma-0" justify="center" align="center">
                         <v-col cols="10" class="pa-0">
                             <v-row class="ma-0">
@@ -20,7 +20,7 @@
                                     <v-icon small>mdi-alarm</v-icon>
                                     {{timeSpan}}
                                     <v-spacer></v-spacer>
-                                    <v-icon small>mdi-currency-usd</v-icon>
+                                    <v-icon small>mdi-currency-eur</v-icon>
                                     {{price}}
                                 </v-row>
                             </v-row>
@@ -57,7 +57,7 @@
                 markerRadius: 10,
                 linearOffset: 0,
                 timeSpan: "18:00 - 20:00",
-                price: "€4,-",
+                price: "4,-",
                 mealName: "MeatBalls",
             }
         },
