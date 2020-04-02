@@ -50,7 +50,7 @@
         name: "Map",
         data() {
             return {
-                accessToken: "pk.eyJ1IjoibGV2aTEyNSIsImEiOiJjazdmemF0YmgwNGdoM25sMWlkdW5odHFtIn0.j7r078aeYv8NyC6k9-L-Kg",
+                accessToken: "pk.eyJ1IjoibGV2aTEyNSIsImEiOiJjazhpajRoeTQwMmh1M2RvNHZpeGhueTl5In0.oxKsWN02FgviTbK3eT2WRg",
                 mapStyle: "mapbox://styles/mapbox/streets-v11",
                 coordinates: [20.549668, -5.014],
                 markerHeight: 23,
