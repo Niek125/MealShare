@@ -21,7 +21,7 @@
             <v-sheet class="transparent" height="calc(100vh - 112px)">
                 <v-row class="ma-0" justify="center">
                     <v-col cols="10" class="pa-0">
-                        <v-card class="mt-4">
+                        <v-card class="mt-4 rounded" flat>
                             <v-img src="https://picsum.photos/510/300?random">
                                 <v-sheet id="mealImgGrad" class="fill-height transparent">
                                     <v-row align="space-between" class="ma-0 fill-height">
@@ -30,8 +30,8 @@
                                                 <v-card-title class="white--text pt-3 pb-1">Meatballs
                                                 </v-card-title>
                                                 <v-spacer></v-spacer>
-                                                <v-card color="#74D277" tile id="shaved-edge">
-                                                    <v-card-title class="white--text pt-3 pb-1">€3,50</v-card-title>
+                                                <v-card flat color="#74D277" tile id="shaved-edge">
+                                                    <v-card-title class="white--text py-2">€3,50</v-card-title>
                                                 </v-card>
                                             </v-row>
                                         </v-col>
@@ -70,14 +70,14 @@
                             </v-card-title>
                         </v-row>
                         <v-row class="ma-0">
-                            <v-card class="mt-4">
-                                <v-img src="">
-                                    <v-container class="fill-height ma-0" fluid>
+                            <v-card class="mt-4 rounded" flat>
+                                <v-img :src="`${publicPath}map.png`">
+                                    <v-row class="ma-0 fill-height" justify="center" align="center">
                                         <v-card-title>
                                             <v-icon class=" mr-4">mdi-google-maps</v-icon>
                                             Routebeschrijving
                                         </v-card-title>
-                                    </v-container>
+                                    </v-row>
                                 </v-img>
                             </v-card>
                         </v-row>
@@ -107,8 +107,9 @@
                 userName: "Piet Klaasen",
                 mealLocation: "Eindhoven, Rachelsmolen",
                 timeSpan: "16:00 - 18:00",
+                publicPath: process.env.BASE_URL
             }
-        }
+        },
     }
 </script>
 
@@ -118,6 +119,6 @@
     }
 
     #shaved-edge {
-        border-bottom-left-radius: 9px;
+        border-bottom-left-radius: 19px;
     }
 </style>
