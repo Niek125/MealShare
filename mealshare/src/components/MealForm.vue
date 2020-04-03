@@ -2,11 +2,11 @@
   <v-row class="ma-0" align="center" justify="center">
     <TopBar pageTitle="Post a meal"></TopBar>
 
-    <v-sheet class="overflow-y-auto pa-4 my-2 transparent" height="calc(100vh - 112px)">
+    <v-sheet tile class="overflow-y-auto pa-4 my-2 transparent" height="calc(100vh - 112px)">
       <!-- Add a photo -->
       <v-row class="ma-0">
-        <v-card flat>
-          <v-img src="https://picsum.photos/510/300?random">
+        <v-card flat class="rounded">
+          <v-img  src="https://picsum.photos/510/300?random">
             <v-row justify="center" align="center" class="fill-height">
               <v-icon color="white" size="50">mdi-camera-iris</v-icon>
             </v-row>
@@ -16,7 +16,7 @@
 
       <!-- Add a name -->
       <v-row class="ma-0 mt-8">
-        <v-text-field
+        <v-text-field class="rounded"
           v-model="mealName"
           label="Name"
           placeholder="Spaghetti Bolognese"
@@ -32,7 +32,7 @@
           <v-dialog max-width="308px" v-model="startDialog">
             <template v-slot:activator="{ on }">
               <div v-on="on">
-                <v-text-field
+                <v-text-field class="rounded"
                   label="Pick up from"
                   :placeholder="startTime"
                   height="56px"
@@ -54,9 +54,9 @@
                 ></v-time-picker>
 
                 <!-- Close the pop up dialog btn -->
-                <v-btn
+                <v-btn 
                   width="100%"
-                  class="mt-3"
+                  class="mt-3 rounded"
                   color="primary"
                   depressed
                   x-large
@@ -72,7 +72,7 @@
           <v-dialog max-width="308px" v-model="endDialog">
             <template v-slot:activator="{ on }">
               <div v-on="on">
-                <v-text-field
+                <v-text-field class="rounded"
                   label="Untill"
                   :placeholder="endTime"
                   height="56px"
@@ -110,7 +110,7 @@
 
         <!-- Add a price -->
         <v-col cols="3" class="pa-0">
-          <v-text-field
+          <v-text-field class="rounded"
             v-model="price"
             label="Price"
             prefix="€"
@@ -136,7 +136,7 @@
 
       <!-- Post button -->
       <v-row class="ma-0 my-6" justify="center">
-        <v-btn height="60" text block depressed dark class="btn" color="white" v-on:click="post">
+        <v-btn height="60" text block depressed dark class="btn rounded" color="white" v-on:click="post">
           Post
         </v-btn>
       </v-row>
