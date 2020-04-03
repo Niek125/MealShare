@@ -17,11 +17,11 @@
                                 <v-col cols="12" class="pa-0">
                                     <v-row class="ma-0">
                                         <v-icon class="ml-4">mdi-alarm</v-icon>
-                                        <v-card-title>{{meal.startTime}} - {{meal.endTime}}
+                                        <v-card-title class="subtitle-1 font-weight-medium pl-2">{{meal.startTime}} - {{meal.endTime}}
                                         </v-card-title>
                                         <v-spacer></v-spacer>
                                         <v-icon>mdi-map-marker</v-icon>
-                                        <v-card-title>{{meal.distance}}</v-card-title>
+                                        <v-card-title class="subtitle-1 font-weight-medium pl-2 pr-5">{{meal.distance}}</v-card-title>
                                     </v-row>
                                 </v-col>
                             </v-sheet>
@@ -49,7 +49,7 @@
                         price: "€1,50",
                         startTime: "12:00",
                         endTime: "14:00",
-                        distance: "2.5km",
+                        distance: "2.5 km",
                         rating: 3.4,
                         userName: "Marcel Veldhuizen",
                         address: "Eindhoven, Hooidonksemolen",
