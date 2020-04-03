@@ -11,6 +11,7 @@
 
 <script>
     import BottomNav from "./components/NavBar/BottomNav";
+    import {mapActions} from "vuex";
 
     export default {
         name: 'App',
@@ -20,5 +21,11 @@
                 document.title = to.meta.title || 'Meal Share'
             }
         },
+        methods: {
+            ...mapActions("meals", ["load",]),
+        },
+        created() {
+            this.load();
+        }
     };
 </script>

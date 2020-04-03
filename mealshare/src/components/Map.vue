@@ -52,11 +52,15 @@
 <script>
     import Mapbox from "mapbox-gl";
     import {MglMap, MglMarker, MglPopup} from "vue-mapbox";
+    import {mapGetters} from "vuex";
     import MealOverview from "@/components/MealOverview";
     import TopBar from "./NavBar/TopBar";
 
     export default {
         name: "Map",
+        computed: {
+            ...mapGetters("meals", ["meals"])
+        },
         data() {
             return {
                 accessToken: "pk.eyJ1IjoibGV2aTEyNSIsImEiOiJjazhpajRoeTQwMmh1M2RvNHZpeGhueTl5In0.oxKsWN02FgviTbK3eT2WRg",
@@ -64,20 +68,6 @@
                 markerHeight: 23,
                 markerRadius: 10,
                 linearOffset: 0,
-                meals: [
-                    {
-                        name: "Spaghetti",
-                        price: "€1,50",
-                        startTime: "12:00",
-                        endTime: "14:00",
-                        distance: "2.5km",
-                        rating: 3.4,
-                        userName: "Marcel Veldhuizen",
-                        address: "Eindhoven, Hooidonksemolen",
-                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
-                        coordinates: [5.0, 52.0]
-                    },
-                ],
             }
         },
         methods: {

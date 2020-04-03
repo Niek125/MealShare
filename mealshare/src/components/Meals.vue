@@ -37,71 +37,14 @@
     import TopBar from "./NavBar/TopBar";
     import MealOverview from "./MealOverview";
     import MealTitle from "./Meal/MealTitle";
+    import {mapGetters} from "vuex";
 
     export default {
         name: "Meals",
         components: {MealTitle, MealOverview, TopBar},
-        data() {
-            return {
-                meals: [
-                    {
-                        name: "Spaghetti",
-                        price: "€1,50",
-                        startTime: "12:00",
-                        endTime: "14:00",
-                        distance: "2.5km",
-                        rating: 3.4,
-                        userName: "Marcel Veldhuizen",
-                        address: "Eindhoven, Hooidonksemolen",
-                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
-                    },
-                    {
-                        name: "Spaghetti",
-                        price: "€1,50",
-                        startTime: "12:00",
-                        endTime: "14:00",
-                        distance: "2.5km",
-                        rating: 3.4,
-                        userName: "Marcel Veldhuizen",
-                        address: "Eindhoven, Hooidonksemolen",
-                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
-                    },
-                    {
-                        name: "Spaghetti",
-                        price: "€1,50",
-                        startTime: "12:00",
-                        endTime: "14:00",
-                        distance: "2.5km",
-                        rating: 3.4,
-                        userName: "Marcel Veldhuizen",
-                        address: "Eindhoven, Hooidonksemolen",
-                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
-                    },
-                    {
-                        name: "Spaghetti",
-                        price: "€1,50",
-                        startTime: "12:00",
-                        endTime: "14:00",
-                        distance: "2.5km",
-                        rating: 3.4,
-                        userName: "Marcel Veldhuizen",
-                        address: "Eindhoven, Hooidonksemolen",
-                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
-                    },
-                    {
-                        name: "Spaghetti",
-                        price: "€1,50",
-                        startTime: "12:00",
-                        endTime: "14:00",
-                        distance: "2.5km",
-                        rating: 3.4,
-                        userName: "Marcel Veldhuizen",
-                        address: "Eindhoven, Hooidonksemolen",
-                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
-                    },
-                ],
-            }
-        }
+        computed: {
+            ...mapGetters("meals", ["meals"])
+        },
     }
 </script>
 
