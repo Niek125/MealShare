@@ -1,7 +1,7 @@
 <template>
     <div>
         <TopBar page-title="Meals"></TopBar>
-        <v-list class="transparent overflow-y-auto" height="calc(100vh - 112px)">
+        <v-list class="transparent overflow-y-auto pa-0 my-2" height="calc(100vh - 112px)">
             <v-list-item v-for="(meal, index) in meals" :key="'meal' + index" class="py-4">
                 <MealOverview :meal-name="meal.name" :price="meal.price" :rating="meal.rating"
                               :user-name="meal.userName" :start-time="meal.startTime" :end-time="meal.endTime"

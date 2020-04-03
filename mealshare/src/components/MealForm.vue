@@ -2,9 +2,9 @@
   <v-row class="ma-0" align="center" justify="center">
     <TopBar pageTitle="Post a meal"></TopBar>
 
-    <v-col cols="10" class="pa-0">
+    <v-sheet class="overflow-y-auto pa-4 my-2 transparent" height="calc(100vh - 112px)">
       <!-- Add a photo -->
-      <v-row class="ma-0 mt-10">
+      <v-row class="ma-0">
         <v-card flat>
           <v-img src="https://picsum.photos/510/300?random">
             <v-row justify="center" align="center" class="fill-height">
@@ -15,7 +15,7 @@
       </v-row>
 
       <!-- Add a name -->
-      <v-row class="ma-0 mt-10">
+      <v-row class="ma-0 mt-8">
         <v-text-field
           v-model="mealName"
           label="Name"
@@ -26,7 +26,7 @@
       </v-row>
 
       <!-- Add a timespan -->
-      <v-row class="ma-0 mt-2">
+      <v-row class="ma-0">
         <!-- Pop up dialog for startTime -->
         <v-col cols="4" class="pa-0 mr-4">
           <v-dialog max-width="308px" v-model="startDialog">
@@ -135,12 +135,12 @@
       </v-row>
 
       <!-- Post button -->
-      <v-row class="ma-0 mt-7" justify="center">
+      <v-row class="ma-0 my-6" justify="center">
         <v-btn height="60" text block depressed dark class="btn" color="white" v-on:click="post">
           Post
         </v-btn>
       </v-row>
-    </v-col>
+    </v-sheet>
   </v-row>
 </template>
 
