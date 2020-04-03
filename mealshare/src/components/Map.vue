@@ -83,6 +83,7 @@
         methods: {
             onMapLoaded(event) {
                 this.map = event.map;
+                this.map.jumpTo({center: [5, 52], zoom: 11})
             }
         },
         created() {
