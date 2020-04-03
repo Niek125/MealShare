@@ -17,8 +17,8 @@
                 </v-row>
             </v-col>
         </v-toolbar>
-        <v-sheet tile color="#F4F4F4">
-            <v-sheet tile class="overflow-y-auto pa-4 mt-2 transparent" height="calc(100vh - 120px)">
+        <v-sheet tile color="#F4F4F4" class="pt-2">
+            <v-sheet tile class="overflow-y-auto pa-4 transparent" height="calc(100vh - 120px)">
                 <v-row class="ma-0" justify="center">
                     <v-card class="mt-4 rounded" flat>
                         <v-img src="https://picsum.photos/510/300?random">
