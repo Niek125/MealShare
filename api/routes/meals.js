@@ -5,9 +5,9 @@ const mysql = require("mysql");
 
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: '',
+    user: 'root',
     password: '',
-    database: '',
+    database: 'mealshare/1',
 })
 
 
@@ -64,7 +64,7 @@ router.get("/", function(req, res, next) {
     // ]);
 
     connection.connect();
-    connection.query("", function (err, rows, fields) {
+    connection.query("SELECT * FROM `meal`", function (err, rows, fields) {
         console.log(rows);
         res.send(rows);
     })
