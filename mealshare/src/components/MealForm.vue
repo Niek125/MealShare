@@ -2,7 +2,7 @@
   <v-row class="ma-0" align="center" justify="center">
     <TopBar pageTitle="Post a meal"></TopBar>
 
-    <v-col cols="10">
+    <v-col cols="10" class="pa-0">
       <!-- Add a photo -->
       <v-row class="ma-0 mt-10">
         <v-card flat>
