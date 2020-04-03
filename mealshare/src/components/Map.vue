@@ -3,7 +3,7 @@
         <TopBar page-title="Find a meal"></TopBar>
         <v-sheet height="calc(100vh - 112px)" tile>
             <MglMap :accessToken="accessToken" :mapStyle="mapStyle" @load="onMapLoaded">
-                <MglMarker :coordinates="coordinates" color="#74D277">
+                <MglMarker :coordinates="meal.coordinates" color="#74D277" v-for="(meal, index) in meals" :key="'marker' + index">
                     <MglPopup :closeButton="false" :offset="{
                 'top': [0, 0],
                  'top-left': [0,0],
@@ -18,18 +18,20 @@
                             <v-row class="ma-0" justify="center" align="center">
                                 <v-col cols="10" class="pa-0">
                                     <v-row class="ma-0">
-                                        <v-card-text class="pa-2 pb-0">{{mealName}}</v-card-text>
+                                        <v-card-text class="pa-2 pb-0">{{meal.name}}</v-card-text>
                                         <v-row class="ma-0 px-2 pb-1">
                                             <v-icon small>mdi-alarm</v-icon>
-                                            {{timeSpan}}
+                                            {{meal.startTime}} - {{meal.endTime}}
                                             <v-spacer></v-spacer>
                                             <v-icon small>mdi-currency-eur</v-icon>
-                                            {{price}}
+                                            {{meal.price}}
                                         </v-row>
                                     </v-row>
                                 </v-col>
                                 <v-col cols="2" class="pa-0">
-                                    <MealOverview>
+                                    <MealOverview :meal-name="meal.name" :price="meal.price" :rating="meal.rating"
+                                                  :user-name="meal.userName" :start-time="meal.startTime" :end-time="meal.endTime"
+                                                  :address="meal.address" :tags="meal.tags">
                                         <template v-slot:activator="{on}">
                                             <v-btn icon v-on="on">
                                                 <v-icon>mdi-chevron-right</v-icon>
@@ -59,13 +61,23 @@
             return {
                 accessToken: "pk.eyJ1IjoibGV2aTEyNSIsImEiOiJjazhpajRoeTQwMmh1M2RvNHZpeGhueTl5In0.oxKsWN02FgviTbK3eT2WRg",
                 mapStyle: "mapbox://styles/mapbox/streets-v11",
-                coordinates: [20.549668, -5.014],
                 markerHeight: 23,
                 markerRadius: 10,
                 linearOffset: 0,
-                timeSpan: "18:00 - 20:00",
-                price: "4,-",
-                mealName: "MeatBalls",
+                meals: [
+                    {
+                        name: "Spaghetti",
+                        price: "€1,50",
+                        startTime: "12:00",
+                        endTime: "14:00",
+                        distance: "2.5km",
+                        rating: 3.4,
+                        userName: "Marcel Veldhuizen",
+                        address: "Eindhoven, Hooidonksemolen",
+                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
+                        coordinates: [5.0, 52.0]
+                    }
+                ],
             }
         },
         methods: {
