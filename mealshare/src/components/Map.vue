@@ -76,7 +76,7 @@
                         address: "Eindhoven, Hooidonksemolen",
                         tags: ["spicy", "gluten", "meat", "fish", "fruit",],
                         coordinates: [5.0, 52.0]
-                    }
+                    },
                 ],
             }
         },

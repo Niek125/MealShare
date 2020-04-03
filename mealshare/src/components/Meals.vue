@@ -1,8 +1,8 @@
 <template>
     <div>
         <TopBar page-title="Meals"></TopBar>
-        <v-list class="transparent">
-            <v-list-item v-for="(meal, index) in meals" :key="'meal' + index">
+        <v-list class="transparent overflow-y-auto" height="calc(100vh - 112px)">
+            <v-list-item v-for="(meal, index) in meals" :key="'meal' + index" class="py-4">
                 <MealOverview :meal-name="meal.name" :price="meal.price" :rating="meal.rating"
                               :user-name="meal.userName" :start-time="meal.startTime" :end-time="meal.endTime"
                               :address="meal.address" :tags="meal.tags">
@@ -54,7 +54,51 @@
                         userName: "Marcel Veldhuizen",
                         address: "Eindhoven, Hooidonksemolen",
                         tags: ["spicy", "gluten", "meat", "fish", "fruit",],
-                    }
+                    },
+                    {
+                        name: "Spaghetti",
+                        price: "€1,50",
+                        startTime: "12:00",
+                        endTime: "14:00",
+                        distance: "2.5km",
+                        rating: 3.4,
+                        userName: "Marcel Veldhuizen",
+                        address: "Eindhoven, Hooidonksemolen",
+                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
+                    },
+                    {
+                        name: "Spaghetti",
+                        price: "€1,50",
+                        startTime: "12:00",
+                        endTime: "14:00",
+                        distance: "2.5km",
+                        rating: 3.4,
+                        userName: "Marcel Veldhuizen",
+                        address: "Eindhoven, Hooidonksemolen",
+                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
+                    },
+                    {
+                        name: "Spaghetti",
+                        price: "€1,50",
+                        startTime: "12:00",
+                        endTime: "14:00",
+                        distance: "2.5km",
+                        rating: 3.4,
+                        userName: "Marcel Veldhuizen",
+                        address: "Eindhoven, Hooidonksemolen",
+                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
+                    },
+                    {
+                        name: "Spaghetti",
+                        price: "€1,50",
+                        startTime: "12:00",
+                        endTime: "14:00",
+                        distance: "2.5km",
+                        rating: 3.4,
+                        userName: "Marcel Veldhuizen",
+                        address: "Eindhoven, Hooidonksemolen",
+                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
+                    },
                 ],
             }
         }
