@@ -44,10 +44,10 @@
               </div>
             </template>
 
-            <v-card>
-              <v-card-title class="headline grey lighten-2" primary-title>Pick up from</v-card-title>
-              <v-card-actions class="d-flex flex-column">
-                <v-time-picker
+            <v-card class="rounded">
+                <v-card-actions class="d-flex flex-column">
+                <v-time-picker flat class="rounded"
+                  color="#74D277"
                   format="24hr"
                   :allowed-minutes="(m) => m % 15 == 0"
                   v-model="startTime"
@@ -57,7 +57,8 @@
                 <v-btn 
                   width="100%"
                   class="mt-3 rounded"
-                  color="primary"
+                  color="#74D277"
+                  dark
                   depressed
                   x-large
                   @click="startDialog = false"
@@ -84,21 +85,22 @@
               </div>
             </template>
 
-            <v-card>
-              <v-card-title class="headline grey lighten-2" primary-title>Pick up untill</v-card-title>
-              <v-card-actions class="d-flex flex-column">
-                <v-time-picker
+            <v-card class="rounded">
+                <v-card-actions class="d-flex flex-column rounded">
+                <v-time-picker class="rounded"
+                  color="#74D277"
                   format="24hr"
                   :allowed-minutes="(m) => m % 15 == 0"
                   v-model="endTime"
                 ></v-time-picker>
 
                 <!-- Close the pop up dialog btn -->
-                <v-btn
+                <v-btn 
                   width="100%"
-                  class="mt-3"
-                  color="primary"
+                  class="mt-3 rounded"
+                  color="#74D277"
                   depressed
+                  dark
                   x-large
                   @click="endDialog = false"
                 >Apply</v-btn>
