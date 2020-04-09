@@ -3,15 +3,48 @@ const router = express.Router();
 
 const mysql = require("mysql");
 
-const connection = mysql.createConnection({
+const config = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'mealshare/1',
-})
+    database: 'mealshare/2',
+}
+
+class Database {
+    constructor() {
+        this.connection = mysql.createConnection(config);
+    }
+
+    query(sql, args) {
+        return new Promise((resolve, reject) => {
+            this.connection.query(sql, args, (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
+    }
+
+    close() {
+        return new Promise((resolve, reject) => {
+            this.connection.end(err => {
+                if (err)
+                    return reject(err);
+                resolve();
+            });
+        });
+    }
+}
+
+// async function addTags(err, rows) {
+//     for (const x of rows) {
+//         let tags = await connection.query("SELECT tag.name FROM `tag` INNER JOIN `meal_tag` ON tag.id = meal_tag.tagid WHERE meal_tag.mealid = " + x.id);
+//         console.log(tags);
+//     }
+// }
 
 
-router.get("/", function(req, res, next) {
+router.get("/", function (req, res, next) {
     // res.send([
     //     {
     //         name: "Spaghetti",
@@ -62,13 +95,50 @@ router.get("/", function(req, res, next) {
     //         coordinates: [4.992, 52.78],
     //     },
     // ]);
-
-    connection.connect();
-    connection.query("SELECT * FROM `meal`", function (err, rows, fields) {
-        console.log(rows);
-        res.send(rows);
-    })
-    connection.end();
+    // name: "Spaghetti",
+    //         id name startTime endTime price image rating userName longtitude lattitude tags
+    //     connection.connect();
+    // connection.query("SELECT\n" +
+    //     "    meal.id,\n" +
+    //     "    meal.name,\n" +
+    //     "    meal.startTime,\n" +
+    //     "    meal.endTime,\n" +
+    //     "    meal.price,\n" +
+    //     "    meal.image,\n" +
+    //     "    AVG(review.rating) AS rating,\n" +
+    //     "    USER.name,\n" +
+    //     "    USER.longitude,\n" +
+    //     "    USER.latitude\n" +
+    //     "FROM\n" +
+    //     "    `meal`\n" +
+    //     "INNER JOIN `user` ON meal.makerid = USER.id\n" +
+    //     "LEFT JOIN `review` ON meal.id = review.mealid\n" +
+    //     "GROUP BY\n" +
+    //     "    meal.id",
+    //     async function (err, rows, fields) {
+    //         if (err) {
+    //             console.log(err);
+    //         }
+    //         await addTags(err, rows);
+    //         console.log("closing connection")
+    //         connection.end();
+    //         res.send(rows);
+    //     })
+    const db = new Database();
+    let data = db.query("SELECT meal.id, meal.name, meal.startTime, meal.endTime, meal.price, meal.image," +
+        " AVG(review.rating) AS rating, USER.name, USER.longitude, USER.latitude" +
+        " FROM `meal` INNER JOIN `user` ON meal.makerid = USER.id LEFT JOIN `review` ON meal.id = review.mealid" +
+        " GROUP BY meal.id")
+        .then(async function(rows) {
+            for (let row of rows){
+                console.log(row.id);
+                row.tags = await db.query("SELECT tag.name" +
+                    " FROM `tag` INNER JOIN `meal_tag` ON tag.id = meal_tag.tagid" +
+                    " WHERE meal_tag.mealid = " + row.id)
+            }
+            await db.close();
+            res.send(rows);
+        })
 })
 
 module.exports = router;
