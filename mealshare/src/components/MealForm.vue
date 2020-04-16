@@ -3,6 +3,22 @@
     <TopBar pageTitle="Post a meal"></TopBar>
     <v-row class="ma-0" align="center" justify="center">
       <v-sheet tile class="overflow-y-auto pa-4 my-2 transparent" height="calc(100vh - 112px)">
+
+        <!-- Camera Function -->
+        <div>
+          <video ref="video" id="video" width="640" height="480" autoplay></video>
+        </div>
+        <div>
+          <button id="snap" v-on:click="capture()">Snap Photo</button>
+        </div>
+        <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
+        <ul>
+          <!-- <li v-for="c in captures">
+            <img v-bind:src="c" height="50" />
+          </li> -->
+        </ul>
+
+
         <!-- Add a photo -->
         <v-row class="ma-0">
           <v-card flat class="rounded">
@@ -185,8 +201,20 @@ export default {
         { tag: "fish", active: false },
         { tag: "fruit", active: false },
         { tag: "vegan", active: false }
-      ]
+      ],
+      video: {},
+      canvas: {},
+      captures: []
     };
+  },
+  mounted() {
+    this.video = this.$refs.video;
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+        this.video.src = window.URL.createObjectURL(stream);
+        this.video.play();
+      });
+    }
   },
   methods: {
     post: function() {
@@ -197,6 +225,13 @@ export default {
         endTime: this.endTime,
         tags: this.tags.filter(x => x.active).map(x => x.tag)
       });
+    },
+    capture() {
+      this.canvas = this.$refs.canvas;
+      var context = this.canvas
+        .getContext("2d")
+        .drawImage(this.video, 0, 0, 640, 480);
+      this.captures.push(canvas.toDataURL("image/png"));
     }
   }
 };
@@ -205,5 +240,15 @@ export default {
 <style scoped>
 .btn {
   background-color: #74d277;
+}
+#video {
+  background-color: #000000;
+}
+#canvas {
+  display: none;
+}
+li {
+  display: inline;
+  padding: 5px;
 }
 </style>
