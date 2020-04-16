@@ -280,7 +280,7 @@ export default {
 .video.front {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
-
+  width: 100%;
   padding-bottom: 278px;
   margin-left: -31px;
 }
@@ -288,6 +288,7 @@ export default {
   background-color: black;
   display: grid;
   width: 100%;
+  max-width:510px;
   height: 200px;
   grid-template-columns: [left] 90vw [bs] 5vw [es] 5vw [right];
   grid-template-rows: [top] 5vh [bs] 5vh [es] 60vh [middle] 10vh [bottom] 20vh [end];
