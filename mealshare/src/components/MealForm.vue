@@ -3,8 +3,25 @@
     <TopBar pageTitle="Post a meal"></TopBar>
     <v-row class="ma-0" align="center" justify="center">
       <v-sheet tile class="overflow-y-auto pa-4 my-2 transparent" height="calc(100vh - 112px)">
+        <!-- Camera Function  -->
+
+        <div class="wrapper rounded" @click="TakePhoto">
+          <video class="video" :class="activeDevice === 0 ? 'front' : ''" ref="video" />
+          <canvas style="display:none" ref="canva" />
+          
+        </div>
+
+        <!-- <button
+          v-if="videoDevices.length > 1"
+          class="button is-rounded is-outlined switch-button"
+          @click="switchCamera"
+        >
+          <b-icon pack="fas" icon="sync-alt" />
+        </button> -->
+
+        <photos-gallery class="gallery rounded" :photos="photos" />
         <!-- Add a photo -->
-        <v-row class="ma-0">
+        <!-- <v-row class="ma-0">
           <v-card flat class="rounded">
             <v-img src="https://picsum.photos/510/300?random">
               <v-row justify="center" align="center" class="fill-height">
@@ -12,7 +29,7 @@
               </v-row>
             </v-img>
           </v-card>
-        </v-row>
+        </v-row>-->
 
         <!-- Add a name -->
         <v-row class="ma-0 mt-8">
@@ -163,11 +180,13 @@
 
 <script>
 import TopBar from "@/components/NavBar/TopBar";
+import PhotosGallery from "./PhotosGallery.vue";
 
 export default {
   name: "MealForm",
   components: {
-    TopBar
+    TopBar,
+    PhotosGallery
   },
   data() {
     return {
@@ -185,7 +204,12 @@ export default {
         { tag: "fish", active: false },
         { tag: "fruit", active: false },
         { tag: "vegan", active: false }
-      ]
+      ],
+      photos: [],
+      mediaStream: null,
+      videoDevices: [],
+      activeDevice: 0,
+      counter: 0
     };
   },
   methods: {
@@ -197,7 +221,49 @@ export default {
         endTime: this.endTime,
         tags: this.tags.filter(x => x.active).map(x => x.tag)
       });
+    },
+    async StartRecording(deviceIdx) {
+      let video = this.$refs.video;
+      this.mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: { deviceId: { exact: this.videoDevices[deviceIdx].deviceId } }
+      });
+      video.srcObject = this.mediaStream;
+      video.play();
+    },
+    async TakePhoto() {
+      let video = this.$refs.video;
+      let canva = this.$refs.canva;
+      let width = video.videoWidth;
+      let height = video.videoHeight;
+      canva.width = width;
+      canva.height = height;
+      let ctx = canva.getContext("2d");
+      ctx.save();
+      if (this.activeDevice === 0) {
+        ctx.scale(-1, 1);
+        ctx.drawImage(video, width * -1, 0, width, height);
+      } else {
+        ctx.drawImage(video, 0, 0);
+      }
+      ctx.restore();
+      this.photos.push({
+        id: this.counter++,
+        src: canva.toDataURL("image/png")
+      });
+    },
+    switchCamera() {
+      const tracks = this.mediaStream.getVideoTracks();
+      tracks.forEach(track => {
+        track.stop();
+      });
+      this.StartRecording((this.activeDevice + 1) % 2);
+      this.activeDevice = (this.activeDevice + 1) % 2;
     }
+  },
+  async mounted() {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    this.videoDevices = devices.filter(d => d.kind === "videoinput");
+    this.StartRecording(0);
   }
 };
 </script>
@@ -205,5 +271,71 @@ export default {
 <style scoped>
 .btn {
   background-color: #74d277;
+}
+
+.photo-btn {
+  background-color: #74d277;
+  
+}
+.video.front {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  width: 100%;
+  padding-bottom: 278px;
+  margin-left: -31px;
+}
+.wrapper {
+  background-color: black;
+  display: grid;
+  width: 100%;
+  max-width:510px;
+  height: 200px;
+  grid-template-columns: [left] 90vw [bs] 5vw [es] 5vw [right];
+  grid-template-rows: [top] 5vh [bs] 5vh [es] 60vh [middle] 10vh [bottom] 20vh [end];
+  justify-items: center;
+  overflow: hidden;
+}
+.video {
+  height: 100%;
+  grid-column: left/right;
+  grid-row: top / bottom;
+  user-select: none;
+  max-width: 100%;
+}
+.switch-button {
+  grid-column: bs / es;
+  grid-row: bs / es;
+  z-index: 5;
+  border-radius: 100%;
+  width: 6vh;
+  height: 6vh;
+  font-size: 2vh;
+}
+.photo-button-container {
+  grid-column: left / right;
+  grid-row: middle / bottom;
+  z-index: 5;
+  width: 100vw;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+}
+.photo-button {
+  width: 10vh;
+  height: 10vh;
+  border-radius: 100%;
+}
+.photo-button {
+  font-size: 4vh;
+  color: black;
+}
+.gallery {
+  margin-top:30px;
+  grid-column: left / right;
+  grid-row: bottom / end;
+  height: 73px;
+  outline: #ABABAB;
+  border: solid 1px #000000;
+  background: #F4F4F4;
 }
 </style>
