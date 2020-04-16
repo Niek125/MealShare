@@ -1,40 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const mysql = require("mysql");
-
-const config = {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'mealshare/2',
-}
-
-class Database {
-    constructor() {
-        this.connection = mysql.createConnection(config);
-    }
-
-    query(sql, args) {
-        return new Promise((resolve, reject) => {
-            this.connection.query(sql, args, (err, rows) => {
-                if (err)
-                    return reject(err);
-                resolve(rows);
-            });
-        });
-    }
-
-    close() {
-        return new Promise((resolve, reject) => {
-            this.connection.end(err => {
-                if (err)
-                    return reject(err);
-                resolve();
-            });
-        });
-    }
-}
+require("../repository/MealRepo")
 
 // async function addTags(err, rows) {
 //     for (const x of rows) {
@@ -124,21 +91,8 @@ router.get("/", function (req, res, next) {
     //         connection.end();
     //         res.send(rows);
     //     })
-    const db = new Database();
-    let data = db.query("SELECT meal.id, meal.name, meal.startTime, meal.endTime, meal.price, meal.image," +
-        " AVG(review.rating) AS rating, USER.name, USER.longitude, USER.latitude" +
-        " FROM `meal` INNER JOIN `user` ON meal.makerid = USER.id LEFT JOIN `review` ON meal.id = review.mealid" +
-        " GROUP BY meal.id")
-        .then(async function(rows) {
-            for (let row of rows){
-                console.log(row.id);
-                row.tags = await db.query("SELECT tag.name" +
-                    " FROM `tag` INNER JOIN `meal_tag` ON tag.id = meal_tag.tagid" +
-                    " WHERE meal_tag.mealid = " + row.id)
-            }
-            await db.close();
-            res.send(rows);
-        })
+    const mealRepo = new MealRepo();
+    res.send(mealRepo.getMeals());
 })
 
 module.exports = router;
