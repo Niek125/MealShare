@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const mysql = require("mysql");
+const webpush = require("web-push");
 
 const config = {
     host: 'localhost',
@@ -9,6 +10,11 @@ const config = {
     password: '',
     database: 'mealshare/2',
 }
+
+const publicVapidKey = "BDWVUjfrWijjfeZDQ2Q7si1_-I_yUGM2Co8BA-vcK3DWt_4sXo4P3US80X7UviHwDbuKoRQyX1zYWlSwn6EO7SY";
+const privateVapidKey = "FmbR7jsn5mVKhs12gSuvhMO-WcGx8Q1-k0hPXHbm6MU";
+
+webpush.setVapidDetails('mailto:localhost:8080', publicVapidKey, privateVapidKey);
 
 class Database {
     constructor() {
@@ -125,7 +131,7 @@ router.get("/", function (req, res, next) {
     //         res.send(rows);
     //     })
     const db = new Database();
-    let data = db.query("SELECT meal.id, meal.name, meal.startTime, meal.endTime, meal.price, meal.image," +
+    db.query("SELECT meal.id, meal.name, meal.startTime, meal.endTime, meal.price, meal.image," +
         " AVG(review.rating) AS rating, USER.name, USER.longitude, USER.latitude" +
         " FROM `meal` INNER JOIN `user` ON meal.makerid = USER.id LEFT JOIN `review` ON meal.id = review.mealid" +
         " GROUP BY meal.id")
@@ -139,6 +145,18 @@ router.get("/", function (req, res, next) {
             await db.close();
             res.send(rows);
         })
+})
+
+router.post("/", function (req, res) {
+    const subscription = req.body;
+    res.status(201).json({});
+    const payload = JSON.stringify({ title: 'test' });
+
+    console.log(subscription);
+
+    webpush.sendNotification(subscription, payload).catch(error => {
+        console.error(error.stack);
+    });
 })
 
 module.exports = router;
