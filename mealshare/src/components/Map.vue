@@ -1,6 +1,10 @@
 <template>
   <div>
     <TopBar page-title="Find a meal"></TopBar>
+
+
+
+
     <v-sheet height="calc(100vh - 112px)" tile>
       <MglMap :accessToken="accessToken" :mapStyle="mapStyle" @load="onMapLoaded">
         <MglMarker
@@ -86,17 +90,26 @@ export default {
       mapStyle: "mapbox://styles/mapbox/streets-v11",
       markerHeight: 30,
       markerRadius: 10,
-      linearOffset: 0
+      linearOffset: 0,
+      coordinates: {
+        lat: 0,
+        lng: 0
+      }
     };
   },
   methods: {
     onMapLoaded(event) {
       this.map = event.map;
-      this.map.jumpTo({ center: [5, 52], zoom: 11 });
+      this.map.jumpTo({ center: [this.coordinates.lng , this.coordinates.lat], zoom: 12 });
     }
   },
   created() {
     this.mapbox = Mapbox;
+    this.$getLocation({})
+      .then(coordinates => {
+        this.coordinates = coordinates;
+      })
+      .catch(error => alert(error));
   },
   components: {
     TopBar,
