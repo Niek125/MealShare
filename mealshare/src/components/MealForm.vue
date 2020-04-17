@@ -324,7 +324,7 @@ export default {
   grid-row: bottom / end;
   height: 73px;
   outline: #ABABAB;
-  border: solid 1px #000000;
+  border: solid 1px rgb(146, 146, 146);
   background: #F4F4F4;
 }
 </style>
