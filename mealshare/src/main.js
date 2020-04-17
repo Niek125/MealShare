@@ -6,6 +6,9 @@ import VueGeolocation from 'vue-browser-geolocation'
 
 import router from "@/router";
 import store from "./store/store";
+import VueInstall from "vue-pwa-install";
+
+Vue.use(VueInstall);
 
 Vue.config.productionTip = false
 Vue.use(VueGeolocation)

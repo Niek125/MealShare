@@ -1,5 +1,8 @@
 <template>
     <v-app>
+        <div id="install-banner" v-if="deferredPrompt">
+            <button @onClick="promptInstall">Add to home screen</button>
+        </div>
         <v-sheet tile width="100vw" height="100vh">
             <v-sheet tile height="calc(100vh - 56px)" color="#F4F4F4">
                 <router-view></router-view>
@@ -15,13 +18,15 @@
     import firebase from 'firebase/app'
     import 'firebase/app'
     import 'firebase/messaging'
+    import {BeforeInstallPromptEvent} from "vue-pwa-install";
 
     export default {
         name: 'App',
         components: {BottomNav},
         data() {
             return {
-                fcmToken: ""
+                fcmToken: "",
+                deferredPrompt: BeforeInstallPromptEvent | null,
             }
         },
         watch: {
@@ -30,7 +35,22 @@
             }
         },
         methods: {
-            ...mapActions("meals", ["load",])
+            ...mapActions("meals", ["load",]),
+            promptInstall() {
+                // Show the prompt:
+                this.deferredPrompt.prompt();
+
+                // Wait for the user to respond to the prompt:
+                this.deferredPrompt.userChoice.then(choiceResult => {
+                    if (choiceResult.outcome === "accepted") {
+                        console.log("User accepted the install prompt");
+                    } else {
+                        console.log("User dismissed the install prompt");
+                    }
+
+                    this.deferredPrompt = null;
+                });
+            }
         },
         mounted() {
             const config = {
