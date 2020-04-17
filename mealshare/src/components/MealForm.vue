@@ -194,13 +194,17 @@
                 startTime: "18:00",
                 endTime: "19:00",
                 tags: [
-                    {tag: "spicy", active: false},
-                    {tag: "gluten", active: false},
-                    {tag: "peanuts", active: false},
                     {tag: "meat", active: false},
                     {tag: "fish", active: false},
+                    {tag: "vegan", active: false},
                     {tag: "fruit", active: false},
-                    {tag: "vegan", active: false}
+                    {tag: "spicy", active: false},
+                    {tag: "sweet", active: false},
+                    {tag: "gluten", active: false},
+                    {tag: "lactose", active: false},
+                    {tag: "peanuts", active: false}
+
+
                 ],
                 photos: [],
                 mediaStream: null,
