@@ -76,7 +76,7 @@
         </v-sheet>
         <v-toolbar bottom color="#74D277">
             <v-row class="ma-0" justify="center">
-                <v-toolbar-title class="white--text">
+                <v-toolbar-title class="white--text" v-on:click="buyMeal">
                     <v-icon color="white">mdi-cart</v-icon>
                     Buy
                 </v-toolbar-title>
@@ -98,6 +98,7 @@
             }
         },
         props: {
+            mealId: Number,
             mealName: String,
             price: String,
             tags: Array,
@@ -106,6 +107,17 @@
             address: String,
             startTime: String,
             endTime: String,
-        }
+        },
+        methods: {
+          buyMeal: function () {
+              fetch("http://localhost:3000/meals/buy", {
+                  method: "POST",
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({mealId: this.mealId, buyerId: 1})
+              });
+          }
+        },
     }
 </script>

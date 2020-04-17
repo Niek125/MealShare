@@ -63,9 +63,10 @@ router.get("/", function (req, res, next) {
 })
 
 router.post("/buy", function (req, res, next) {
+    console.log(req.body);
     const db = new Database();
     let fcmToken = db.query("SELECT `makerid` FROM `meal` WHERE meal.id = ?", [req.body.mealId]);
-    db.query("UPDATE `meal` SET `buyersid`= ? WHERE meal.id = ?", [req.body.buyerid, req.body.mealid])
+    db.query("UPDATE `meal` SET `buyersid`= ? WHERE meal.id = ?", [req.body.buyerId, req.body.mealId])
     db.close();
 })
 
