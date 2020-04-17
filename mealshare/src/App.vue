@@ -2,7 +2,6 @@
     <v-app>
         <v-sheet tile width="100vw" height="100vh">
             <v-sheet tile height="calc(100vh - 56px)" color="#F4F4F4">
-                <p>{{fcmToken}}</p>
                 <router-view></router-view>
             </v-sheet>
             <BottomNav></BottomNav>
