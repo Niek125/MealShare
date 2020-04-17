@@ -350,7 +350,7 @@ export default {
 }
 
 .gallery {
-  display: none; 
+ 
   margin-top: 30px;
   grid-column: left / right;
   grid-row: bottom / end;
