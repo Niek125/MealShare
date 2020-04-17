@@ -7,7 +7,7 @@ const config = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'mealshare/2',
+    database: 'mealshare/3',
 }
 
 class Database {
@@ -37,11 +37,13 @@ class Database {
 }
 
 router.post("/", function (req, res, next) {
+    console.log(req.body);
     const db = new Database();
     db.query("INSERT INTO `meal` (`id`, `name`, `startTime`, `endTime`, `price`, `image`, `buyersid`, `makerid`)" +
-        " VALUES (NULL, '?', '?', '?', '?', 'https://picsum.photos/510/300?random', NULL, '?')",
+        " VALUES (NULL, ?, ?, ?, ?, 'https://picsum.photos/510/300', NULL, ?);",
         [req.body.name, req.body.startTime, req.body.endTime, req.body.price, req.body.userId])
     db.close();
+    res.end();
 })
 
 
@@ -63,11 +65,11 @@ router.get("/", function (req, res, next) {
 })
 
 router.post("/buy", function (req, res, next) {
-    console.log(req.body);
     const db = new Database();
     let fcmToken = db.query("SELECT `makerid` FROM `meal` WHERE meal.id = ?", [req.body.mealId]);
     db.query("UPDATE `meal` SET `buyersid`= ? WHERE meal.id = ?", [req.body.buyerId, req.body.mealId])
     db.close();
+    res.end();
 })
 
 module.exports = router;
