@@ -24,7 +24,7 @@ export default {
                         userName: "Marcel Veldhuizen",
                         address: "Eindhoven, Hooidonksemolen",
                         tags: [ {name:"spicy"}, {name:"gluten"}, {name:"meat"}, {name:"fish"}, {name:"fruit"},],
-                        coordinates: [5.0, 52.0],
+                        coordinates: [5.4697225, 51.441642],
                     },
                     {
                         name: "Meatballs",
@@ -36,7 +36,7 @@ export default {
                         userName: "Maikel Putman",
                         address: "Empel, Vonkenwaard",
                         tags: [{name:"meat"}, {name:"fish"}, {name:"fruit"},],
-                        coordinates: [5.2344, 51.6900],
+                        coordinates: [5.457462, 51.448103],
                     },
                     {
                         name: "Fish & Chips",
@@ -48,7 +48,7 @@ export default {
                         userName: "Jan Klaasen",
                         address: "Zuiderdorp, Niewe Gouw",
                         tags: [{name:"fruit"},],
-                        coordinates: [4.97, 52.4],
+                        coordinates: [5.4299337, 51.4548763],
                     },
                     {
                         name: "Sandwich",
@@ -60,7 +60,7 @@ export default {
                         userName: "Jasmine Jansen",
                         address: "Eindhoven, Rachelsmolen",
                         tags: [{name:"meat"}],
-                        coordinates: [4.992, 52.78],
+                        coordinates: [5.4525753, 51.4745863],
                     },
                 ]);
             });

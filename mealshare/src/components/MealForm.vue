@@ -10,20 +10,43 @@
           <canvas style="display:none" ref="canva" />
         </div>
 
-    <!-- v-if="videoDevices.length > 1" -->
-        <button
-          
-          class="button is-rounded is-outlined switch-button"
-          @click="switchCamera"
-        >
-          <b-icon pack="fas" icon="sync-alt" /> Swap camera
-        </button>
-
-        <!-- Gallery -->
-        <photos-gallery class="gallery rounded" :photos="photos"/>
+        <!-- Switch Button -->
+        <!-- v-if="videoDevices.length > 1" -->
+        <v-row class="mt-4">
+          <v-col cols="2">
+            <v-btn
+              height="60"
+              text
+              class="btn swap-btn rounded"
+              color="white"
+              @click="TakePhoto"
+            >
+              <b-icon pack="fas" icon="sync-alt" />
+              <v-icon>mdi-camera</v-icon>
+            </v-btn>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="2">
+            <v-btn
+              height="60"
+              text
+              class="btn swap-btn rounded"
+              color="white"
+              @click="switchCamera"
+            >
+              <b-icon pack="fas" icon="sync-alt" />
+              <v-icon>mdi-autorenew</v-icon>
+            </v-btn>
+          </v-col>
+          <v-spacer></v-spacer>
+          <!-- Gallery -->
+          <v-col cols="7" class="">
+            <photos-gallery class="gallery rounded" :photos="photos" />
+          </v-col>
+        </v-row>
 
         <!-- Add a name -->
-        <v-row class="ma-0 mt-8">
+        <v-row class="ma-0 mt-4">
           <v-text-field
             class="rounded"
             v-model="mealName"
@@ -350,13 +373,15 @@ export default {
 }
 
 .gallery {
-  display: none; 
-  margin-top: 30px;
   grid-column: left / right;
   grid-row: bottom / end;
-  height: 73px;
+  height: 60px;
   outline: #ababab;
   border: solid 1px rgb(146, 146, 146);
   background: #f4f4f4;
+}
+
+.swap-btn {
+  padding-right: 20px;
 }
 </style>
