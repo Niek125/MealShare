@@ -34,9 +34,7 @@ class MealRepo {
     async getFcmToken(mealId) {
         const db = new Database();
         let data = await db.query("SELECT `fcmtoken` FROM `meal` WHERE meal.id = ?", [mealId])
-            .then(() => {
-                db.close();
-            });
+        await db.close();
         return data[0].fcmtoken;
     }
 

@@ -20,7 +20,7 @@ router.get("/", async function (req, res, next) {
 })
 
 router.post("/buy", async function (req, res, next) {
-    let fcmToken = mealRepo.getFcmToken(req.body.mealId);
+    let fcmToken = await mealRepo.getFcmToken(req.body.mealId);
     mealRepo.buyMeal(req.body.buyerId, req.body.mealId);
 
     let message = {
@@ -35,6 +35,7 @@ router.post("/buy", async function (req, res, next) {
     fcm.send(message, function (err, response) {
         if (err) {
             console.log(err);
+            console.log(response);
             console.log("Something has gone wrong!");
         } else {
             console.log("Successfully sent with response: ", response);
