@@ -20,7 +20,7 @@
     <v-sheet  color="#F4F4F4" class="meal-wrapper">
       <v-sheet tile  class="pa-4 meal-item overflow-y-auto transparent" height="calc(100vh - 112px)">
         <v-row class="ma-0" justify="center">
-          <v-card class="mt-4 rounded" flat>
+          <v-card class="mt-0 rounded" flat>
             <v-img src="https://picsum.photos/510/300?random">
               <v-sheet class="fill-height transparent mealImgGrad">
                 <v-row align="space-between" class="ma-0 fill-height">
@@ -54,8 +54,8 @@
               ></v-rating>
             </v-row>
             <!-- Username -->
-            <v-row class="ma-0">
-              <v-card-title class="pl-0">
+            <v-row class="ma-0 ">
+              <v-card-title class="pl-0 py-2">
                 <v-icon color="#74D277" class="mr-4">mdi-account</v-icon>
                 {{userName}}
               </v-card-title>
@@ -63,7 +63,7 @@
 
             <!-- Location -->
             <v-row class="ma-0">
-              <v-card-title class="pl-0">
+              <v-card-title class="pl-0 py-2">
                 <v-icon color="#74D277" class="mr-4">mdi-map-marker</v-icon>
                 {{address}}
               </v-card-title>
@@ -71,7 +71,7 @@
 
             <!-- Pickup Timespan -->
             <v-row class="ma-0">
-              <v-card-title class="pl-0">
+              <v-card-title class="pl-0 py-2">
                 <v-icon color="#74D277" class="mr-4">mdi-alarm</v-icon>
                 {{startTime}} - {{endTime}}
               </v-card-title>
