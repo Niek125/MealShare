@@ -2,12 +2,15 @@ const express = require('express');
 const router = express.Router();
 
 const mysql = require("mysql");
+const FCM = require("fcm-node");
+
+const fcm = new FCM("AAAAzkG9bXw:APA91bGGCY9P6aJcRayz3WzUTNaRu1X_-BK_iDxeoE0ByW3JrPU1OVBjKHyftCQVhVr1nH7c6MWRS0JXp2l_sTIt8u7U3Z1iaXLA42DKb16IbIkKPGevldeh86wJnTceXikemPn-LT9m");
 
 const config = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'mealshare/3',
+    database: 'mealshare/4',
 }
 
 class Database {
@@ -39,8 +42,8 @@ class Database {
 router.post("/", function (req, res, next) {
     console.log(req.body);
     const db = new Database();
-    db.query("INSERT INTO `meal` (`id`, `name`, `startTime`, `endTime`, `price`, `image`, `buyersid`, `makerid`)" +
-        " VALUES (NULL, ?, ?, ?, ?, 'https://picsum.photos/510/300', NULL, ?);",
+    db.query("INSERT INTO `meal` (`id`, `name`, `startTime`, `endTime`, `price`, `image`, `buyersid`, `makerid`, `fcmtoken`)" +
+        " VALUES (NULL, ?, ?, ?, ?, 'https://picsum.photos/510/300', NULL, 1, ?);",
         [req.body.name, req.body.startTime, req.body.endTime, req.body.price, req.body.userId])
     db.close();
     res.end();
@@ -64,10 +67,31 @@ router.get("/", function (req, res, next) {
         })
 })
 
-router.post("/buy", function (req, res, next) {
+router.post("/buy", async function (req, res, next) {
     const db = new Database();
-    let fcmToken = db.query("SELECT `makerid` FROM `meal` WHERE meal.id = ?", [req.body.mealId]);
-    db.query("UPDATE `meal` SET `buyersid`= ? WHERE meal.id = ?", [req.body.buyerId, req.body.mealId])
+    let fcmToken = await db.query("SELECT `fcmtoken` FROM `meal` WHERE meal.id = ?", [req.body.mealId]);
+    fcmToken = fcmToken[0].fcmtoken;
+    await db.query("UPDATE `meal` SET `buyersid`= ? WHERE meal.id = ?", [req.body.buyerId, req.body.mealId]);
+
+    console.log(fcmToken);
+    let message = {
+        to: fcmToken,
+
+        notification: {
+            title: "Meal purchase",
+            body: "Your meal has been sold"
+        }
+    }
+
+    fcm.send(message, function (err, response) {
+        if (err) {
+            console.log(err);
+            console.log("Something has gone wrong!");
+        } else {
+            console.log("Successfully sent with response: ", response);
+        }
+    })
+
     db.close();
     res.end();
 })
