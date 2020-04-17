@@ -12,7 +12,7 @@
 
         <!-- Switch Button -->
         <!-- v-if="videoDevices.length > 1" -->
-        <v-row>
+        <v-row class="mt-4">
           <v-col cols="2">
             <v-btn
               height="60"
