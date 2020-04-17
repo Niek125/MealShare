@@ -40,15 +40,5 @@ export default {
 }
 .list-animated-enter {
   opacity: 0;
-  /* transform: translateX(30px); */
 }
-/* .list-animated-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-}
-.list-animated-leave-active {
-  position: absolute;
-  min-width: 1000%;
-  height: 20%;
-} */
 </style>

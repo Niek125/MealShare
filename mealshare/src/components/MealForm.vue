@@ -11,25 +11,15 @@
           
         </div>
 
-        <!-- <button
+        <button
           v-if="videoDevices.length > 1"
           class="button is-rounded is-outlined switch-button"
           @click="switchCamera"
         >
           <b-icon pack="fas" icon="sync-alt" />
-        </button> -->
+        </button>
 
         <photos-gallery class="gallery rounded" :photos="photos" />
-        <!-- Add a photo -->
-        <!-- <v-row class="ma-0">
-          <v-card flat class="rounded">
-            <v-img src="https://picsum.photos/510/300?random">
-              <v-row justify="center" align="center" class="fill-height">
-                <v-icon color="white" size="50">mdi-camera-iris</v-icon>
-              </v-row>
-            </v-img>
-          </v-card>
-        </v-row>-->
 
         <!-- Add a name -->
         <v-row class="ma-0 mt-8">
@@ -46,7 +36,7 @@
         <!-- Add a timespan -->
         <v-row class="ma-0">
           <!-- Pop up dialog for startTime -->
-          <v-col cols="4" class="pa-0 mr-4">
+          <v-col cols="4" class="pa-0">
             <v-dialog max-width="308px" v-model="startDialog">
               <template v-slot:activator="{ on }">
                 <div v-on="on">
@@ -88,7 +78,7 @@
               </v-card>
             </v-dialog>
           </v-col>
-
+<v-spacer></v-spacer>
           <!-- Pop up dialog for endTime -->
           <v-col cols="4" class="pa-0">
             <v-dialog max-width="308px" v-model="endDialog">
@@ -288,7 +278,6 @@ export default {
   background-color: black;
   display: grid;
   width: 100%;
-  max-width:510px;
   height: 200px;
   grid-template-columns: [left] 90vw [bs] 5vw [es] 5vw [right];
   grid-template-rows: [top] 5vh [bs] 5vh [es] 60vh [middle] 10vh [bottom] 20vh [end];
@@ -335,7 +324,7 @@ export default {
   grid-row: bottom / end;
   height: 73px;
   outline: #ABABAB;
-  border: solid 1px #000000;
+  border: solid 1px rgb(146, 146, 146);
   background: #F4F4F4;
 }
 </style>
