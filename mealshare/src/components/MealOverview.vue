@@ -94,7 +94,7 @@
       </v-sheet>
     </v-sheet>
     <!-- Buy Button -->
-    <v-toolbar class="pointer" v-on:click="dialog = false" bottom color="#74D277">
+    <v-toolbar class="pointer" v-on:click="buyMeal" bottom color="#74D277">
       <v-row class="ma-0" justify="center">
         <v-toolbar-title class="white--text">
           <v-icon color="white">mdi-cart</v-icon>Buy
@@ -117,6 +117,7 @@ export default {
     };
   },
   props: {
+    mealId: Number,
     mealName: String,
     price: String,
     tags: Array,
@@ -125,6 +126,18 @@ export default {
     address: String,
     startTime: String,
     endTime: String
+  },
+  methods: {
+    buyMeal: function () {
+      this.dialog = false;
+      fetch("http://localhost:3000/meals/buy", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({mealId: this.mealId, buyerId: 1})
+      });
+    }
   }
 };
 </script>
