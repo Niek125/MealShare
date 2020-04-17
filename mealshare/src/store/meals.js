@@ -23,7 +23,7 @@ export default {
                         rating: 3.4,
                         userName: "Marcel Veldhuizen",
                         address: "Eindhoven, Hooidonksemolen",
-                        tags: ["spicy", "gluten", "meat", "fish", "fruit",],
+                        tags: [ {name:"spicy"}, {name:"gluten"}, {name:"meat"}, {name:"fish"}, {name:"fruit"},],
                         coordinates: [5.0, 52.0],
                     },
                     {
@@ -35,7 +35,7 @@ export default {
                         rating: 4.3,
                         userName: "Maikel Putman",
                         address: "Empel, Vonkenwaard",
-                        tags: ["meat", "fish", "fruit",],
+                        tags: [{name:"meat"}, {name:"fish"}, {name:"fruit"},],
                         coordinates: [5.2344, 51.6900],
                     },
                     {
@@ -47,7 +47,7 @@ export default {
                         rating: 3.1,
                         userName: "Jan Klaasen",
                         address: "Zuiderdorp, Niewe Gouw",
-                        tags: ["fruit",],
+                        tags: [{name:"fruit"},],
                         coordinates: [4.97, 52.4],
                     },
                     {
@@ -59,7 +59,7 @@ export default {
                         rating: 5,
                         userName: "Jasmine Jansen",
                         address: "Eindhoven, Rachelsmolen",
-                        tags: [],
+                        tags: [{name:"meat"}],
                         coordinates: [4.992, 52.78],
                     },
                 ]);
