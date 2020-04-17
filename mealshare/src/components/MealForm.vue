@@ -10,12 +10,13 @@
           <canvas style="display:none" ref="canva" />
         </div>
 
+    <!-- v-if="videoDevices.length > 1" -->
         <button
-          v-if="videoDevices.length > 1"
+          
           class="button is-rounded is-outlined switch-button"
           @click="switchCamera"
         >
-          <b-icon pack="fas" icon="sync-alt" />
+          <b-icon pack="fas" icon="sync-alt" /> Swap camera
         </button>
 
         <!-- Gallery -->
