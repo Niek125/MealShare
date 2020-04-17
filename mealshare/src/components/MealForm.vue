@@ -20,7 +20,7 @@
         </button>
 
         <!-- Gallery -->
-        <!-- <photos-gallery class="gallery rounded" :photos="photos"/> -->
+        <photos-gallery class="gallery rounded" :photos="photos"/>
 
         <!-- Add a name -->
         <v-row class="ma-0 mt-8">
@@ -350,6 +350,7 @@ export default {
 }
 
 .gallery {
+  display: none; 
   margin-top: 30px;
   grid-column: left / right;
   grid-row: bottom / end;
